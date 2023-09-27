@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách sản phẩm</title>
+    <th:block th:replace="~{layout :: link-css}"></th:block>
+</head>
+<body>
+<th:block th:replace="~{layout :: header}"></th:block>
+<section style="background-color: #eee;">
+    <div class="text-center container py-5">
+        <h4 class="mt-4 mb-5"><strong>Sản phẩm mới</strong></h4>
+        <div class="row">
+            <div class="col-lg-3 col-md-12 mb-4" th:each="product : ${products}">
+                <div class="card">
+                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                         data-mdb-ripple-color="light">
+                        <img th:src="@{'https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/' + ${product.mainImage}}"
+                             class="w-75 pt-4"/>
+                        <a th:href="@{'/product/' + ${product.productId}}">
+                            <div class="mask">
+                                <div class="d-flex justify-content-end align-items-end h-100">
+                                    <h5>
+                                        <span class="badge bg-primary me-2"
+                                              th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' &#273;'}">
+                                        </span>
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="hover-overlay">
+                                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <a th:href="@{'/product/' + ${product.productId}}" class="text-reset text-decoration-none">
+                            <p class="card-title mb-3 text-truncate" th:text="${product.productName}"
+                               th:title="${product.productName}"></p>
+                        </a>
+                        <a th:href="@{'/product/search?category=' + ${product.category.categoryName}}">
+                            <p th:text="${product.category.categoryName}"></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <nav aria-label="Page navigation" th:if="${totalPages > 1}">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:class="${currentPage == 0 ? 'disabled' : ''}">
+                            <a class="page-link" th:href="@{|/product?page=${currentPage - 1}|}" aria-label="Previous">
+                                <span aria-hidden="true">&lt;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:class="${page == currentPage ? 'active' : ''}" th:each="page : ${#numbers.sequence(0, totalPages - 1)}">
+                            <a class="page-link" th:href="@{|/product?page=${page}|}" th:text="${page + 1}"></a>
+                        </li>
+                        <li class="page-item" th:class="${currentPage == totalPages - 1 ? 'disabled' : ''}">
+                            <a class="page-link" th:href="@{|/product?page=${currentPage + 1}|}" aria-label="Next">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<th:block th:replace="~{layout :: footer}"></th:block>
+</body>
+</html>

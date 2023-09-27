@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo Sản Phẩm</title>
+    <th:block th:replace="layout-admin :: link-css"></th:block>
+</head>
+<body id="page-top">
+<div id="wrapper">
+    <th:block th:replace="layout-admin :: header"></th:block>
+    <div id="content-wrapper">
+        <div id="content">
+            <th:block th:replace="layout-admin :: nav"></th:block>
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Thêm sản phẩm</h6>
+                    </div>
+                    <form class="p-4" th:action="@{/admin/add-product}" th:object="${product}" method="POST" enctype="multipart/form-data">
+                        <div class="row mt-2">
+                            <div class="col">
+                                <label class="form-label" for="productName">Tên Sản Phẩm: </label>
+                                <input class="form-control" type="text" id="productName" th:field="*{productName}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></span>
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="category">Loại sản phẩm:</label>
+                                <select class="form-control" id="category" name="category.categoryId">
+                                    <option value="">-- Chọn loại sản phẩm --</option>
+                                    <option th:each="category: ${categories}" th:value="${category.categoryId}"
+                                            th:text="${category.categoryName}"></option>
+                                </select>
+                                <span class="text-danger" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span>
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <label class="form-label" for="description">Mô Tả: </label>
+                            <textarea class="form-control" id="description" th:field="*{description}" style="height:300px"></textarea>
+                            <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col">
+                                <label class="form-label" for="note">Ghi Chú: </label>
+                                <input class="form-control" type="text" id="note" th:field="*{note}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></span>
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="price">Giá(VND): </label>
+                                <input class="form-control" type="number" id="price" th:field="*{price}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="amount">Số Lượng: </label>
+                                <input class="form-control" type="number" id="amount" th:field="*{amount}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></span>
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                                    aria-expanded="false" aria-controls="collapseExample">
+                                Thêm hình ảnh
+                            </button>
+                        </div>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <div class="com-sm-4">
+                                    <input type="file" name="mainImage" title="Chọn hình ảnh chính cho sản phẩm" accept="image/*" required>
+                                    <input type="file" name="extraImage" accept="image/*">
+                                    <input type="file" name="extraImage" accept="image/*">
+                                    <input type="file" name="extraImage" accept="image/*">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-success form-control mt-3" type="submit">Thêm sản phẩm</button>
+                    </form>
+                </div>
+            </div>
+            <th:block th:replace="layout-admin :: footer"></th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

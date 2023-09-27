@@ -13,16 +13,15 @@ import java.util.UUID;
 
 
 @Repository
-public interface IUserRepository extends JpaRepository<User, UUID> {
+public interface UserRepository extends JpaRepository<User, UUID> {
+
     User findByEmail(String email);
 
-    @Query("SELECT u FROM User u WHERE u.username = ?1")
     User findByUsername(String username);
 
-    @Query("SELECT u FROM User u WHERE u.verificationCode = ?1")
-    public User findByVerificationCode(String code);
+    User findByVerificationCode(String code);
 
-    public User findByResetPasswordToken(String token);
+    User findByResetPasswordToken(String token);
 
     @Modifying
     @Transactional

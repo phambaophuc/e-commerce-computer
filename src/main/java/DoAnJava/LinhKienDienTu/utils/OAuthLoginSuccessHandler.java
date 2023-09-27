@@ -5,7 +5,7 @@ import DoAnJava.LinhKienDienTu.services.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -13,8 +13,9 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Component
+@AllArgsConstructor
 public class OAuthLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
-    @Autowired
+
     private UserService userService;
 
     @Override

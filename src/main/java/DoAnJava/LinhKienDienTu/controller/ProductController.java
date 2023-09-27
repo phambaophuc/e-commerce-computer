@@ -3,9 +3,9 @@ package DoAnJava.LinhKienDienTu.controller;
 import DoAnJava.LinhKienDienTu.entity.*;
 import DoAnJava.LinhKienDienTu.services.*;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,16 +21,13 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/product")
+@AllArgsConstructor
 public class ProductController {
-    @Autowired
+
     private ProductService productService;
-    @Autowired
     private CommentService commentService;
-    @Autowired
     private UserService userService;
-    @Autowired
     private Parser markdownParser;
-    @Autowired
     private HtmlRenderer markdownHtmlRenderer;
 
     @GetMapping
@@ -54,13 +51,13 @@ public class ProductController {
         model.addAttribute("currentUsername", currentUsername);
 
         Product product = productService.getProductById(productId);
+        String description = product.getDescription();
 
         // Sử dụng thư viện markdown để hiển thị mô tả sản phẩm.
-        String markdownDescription = markdownHtmlRenderer.render(markdownParser.parse(product.getDescription()));
+        String markdownDescription = markdownHtmlRenderer.render(markdownParser.parse(description));
         product.setDescription(markdownDescription);
         model.addAttribute("product", product);
 
-        String description = product.getDescription();
         String htmlDescription = description
                 .replace("{{image1}}", "<img style=\"width:100%;\" src=\"https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/" + product.getExtraImage1() + "\"/>")
                 .replace("{{image2}}", "<img style=\"width:100%;\" src=\"https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/" + product.getExtraImage2() + "\"/>")
@@ -116,8 +113,8 @@ public class ProductController {
             List<Product> products = productService.getProductByCategory(categoryName);
             model.addAttribute("products", products);
             model.addAttribute("searchString", categoryName);
-            return "product/list-search";
         }
+        return "product/list-search";
     }
 
 }

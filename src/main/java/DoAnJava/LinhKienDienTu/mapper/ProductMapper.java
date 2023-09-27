@@ -1,16 +1,19 @@
 package DoAnJava.LinhKienDienTu.mapper;
 
-import DoAnJava.LinhKienDienTu.dto.BillDto;
 import DoAnJava.LinhKienDienTu.dto.ProductDto;
-import DoAnJava.LinhKienDienTu.entity.Bill;
 import DoAnJava.LinhKienDienTu.entity.Product;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 
-@Mapper
-public interface ProductMapper {
-    ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
+@Component
+public class ProductMapper{
 
-    ProductDto toDto(Product product);
+    public ProductDto toProductDto(Product product) {
+        return ProductDto.builder()
+                .productId(product.getProductId())
+                .categoryId(product.getCategory().getCategoryId())
+                .productName(product.getProductName())
+                .image(product.getMainImage())
+                .price(product.getPrice())
+                .build();
+    }
 }

@@ -7,11 +7,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.UUID;
 
 
 @Repository
-public interface IBillRepository extends JpaRepository<Bill, Long> {
+public interface BillRepository extends JpaRepository<Bill, Long> {
+
     @Query("SELECT MONTH(b.createdAt) AS month, SUM(b.totalPrice) AS total " +
             "FROM Bill b " +
             "WHERE YEAR(b.createdAt) = :year " +

@@ -1,13 +1,14 @@
 package DoAnJava.LinhKienDienTu.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class BillDto {
     private Long billId;
     private BigDecimal totalPrice;

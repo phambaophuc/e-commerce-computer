@@ -2,14 +2,17 @@ package DoAnJava.LinhKienDienTu.mapper;
 
 import DoAnJava.LinhKienDienTu.dto.BillDto;
 import DoAnJava.LinhKienDienTu.entity.Bill;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 
-@Mapper
-public interface BillMapper {
-    BillMapper INSTANCE = Mappers.getMapper(BillMapper.class);
+@Component
+public class BillMapper {
 
-    @Mapping(source = "user.fullname", target = "name")
-    BillDto toDto(Bill bill);
+    public BillDto toBillDto(Bill bill) {
+        return BillDto.builder()
+                .billId(bill.getBillId())
+                .totalPrice(bill.getTotalPrice())
+                .createdAt(bill.getCreatedAt())
+                .name(bill.getUser().getFullname())
+                .build();
+    }
 }

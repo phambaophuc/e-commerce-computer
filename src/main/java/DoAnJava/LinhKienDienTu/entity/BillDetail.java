@@ -2,14 +2,13 @@ package DoAnJava.LinhKienDienTu.entity;
 
 import DoAnJava.LinhKienDienTu.entity.compositeKey.BillDetailKey;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "bill_detail")
 public class BillDetail {
+
     @EmbeddedId
     private BillDetailKey id;
 

@@ -5,7 +5,7 @@ import DoAnJava.LinhKienDienTu.services.CartService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,8 +17,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/cart")
+@AllArgsConstructor
 public class CartController {
-    @Autowired
+
     private CartService cartService;
 
     // Sử dụng Session

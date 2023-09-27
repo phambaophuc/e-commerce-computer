@@ -4,7 +4,7 @@ import DoAnJava.LinhKienDienTu.dto.ProductDto;
 import DoAnJava.LinhKienDienTu.entity.Product;
 import DoAnJava.LinhKienDienTu.mapper.ProductMapper;
 import DoAnJava.LinhKienDienTu.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/build")
+@AllArgsConstructor
 public class BuildApiController {
-    @Autowired
+
     private ProductService productService;
-    @Autowired
     private ProductMapper productMapper;
 
     @GetMapping("/{id}")
@@ -24,7 +24,7 @@ public class BuildApiController {
     public ResponseEntity<?> getProductsByCategoryId(@PathVariable("id") Long categoryId) {
         List<Product> products = productService.getProductByCategoryId(categoryId);
         List<ProductDto> productDtos = products.stream()
-                .map(productMapper::toDto)
+                .map(productMapper::toProductDto)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(productDtos);

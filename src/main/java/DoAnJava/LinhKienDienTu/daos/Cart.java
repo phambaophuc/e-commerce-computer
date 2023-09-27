@@ -1,14 +1,12 @@
 package DoAnJava.LinhKienDienTu.daos;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
-@Setter
+@Data
 public class Cart {
     private List<Item> cartItems = new ArrayList<>();
 

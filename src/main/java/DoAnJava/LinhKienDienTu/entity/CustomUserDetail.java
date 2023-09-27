@@ -1,6 +1,6 @@
 package DoAnJava.LinhKienDienTu.entity;
 
-import DoAnJava.LinhKienDienTu.repository.IUserRepository;
+import DoAnJava.LinhKienDienTu.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,11 +10,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CustomUserDetail implements UserDetails {
+
     private final User user;
 
-    private final IUserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public CustomUserDetail(User user, IUserRepository userReponsitory) {
+    public CustomUserDetail(User user, UserRepository userReponsitory) {
         this.user = user;
         this.userRepository = userReponsitory;
     }

@@ -4,17 +4,11 @@ import DoAnJava.LinhKienDienTu.dto.BillDto;
 import DoAnJava.LinhKienDienTu.entity.*;
 import DoAnJava.LinhKienDienTu.mapper.BillMapper;
 import DoAnJava.LinhKienDienTu.services.*;
-import DoAnJava.LinhKienDienTu.utils.FileUploadUlti;
-import DoAnJava.LinhKienDienTu.utils.S3Util;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -32,18 +26,14 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
+@AllArgsConstructor
 public class AdminController {
-    @Autowired
+
     private ProductService productService;
-    @Autowired
     private UserService userService;
-    @Autowired
     private RoleService roleService;
-    @Autowired
     private CategoryService categoryService;
-    @Autowired
     private BillService billService;
-    @Autowired
     private BillMapper billMapper;
 
     @GetMapping
@@ -109,7 +99,7 @@ public class AdminController {
             {
                 model.addAttribute(error.getField() + "_error", error.getDefaultMessage());
             }
-            return "admin/product/edit-product/" + product.getProductId();
+            return "admin/product/edit-product" + product.getProductId();
         }
 
         productService.uploadFileAWS(product, mainMultipartFile, extraMultipartFile, true);
@@ -120,7 +110,6 @@ public class AdminController {
     }
     @GetMapping("/delete-product/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
-        Product product = productService.getProductById(id);
         productService.deleteProduct(id);
         return "redirect:/admin/products";
     }
@@ -167,7 +156,6 @@ public class AdminController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/delete-role/{roleId}")
     public String deleteRole(@PathVariable("roleId") UUID roleId) {
-        Role role = roleService.getRoleById(roleId);
         roleService.removeRole(roleId);
         return "redirect:/admin/roles";
     }
@@ -219,8 +207,8 @@ public class AdminController {
         } else {
             userService.addRoleToUser(userId, roleId);
             redirectAttributes.addFlashAttribute("success", "Đã thêm quyền cho người dùng này");
-            return "redirect:/admin/assign-role/" + userId;
         }
+        return "redirect:/admin/assign-role/" + userId;
     }
 
     // Xóa quyền User
@@ -246,7 +234,7 @@ public class AdminController {
     public String getAllBills(Model model) {
         List<Bill> bills = billService.getAllBill();
         List<BillDto> billDtos = bills.stream()
-                .map(billMapper::toDto)
+                .map(billMapper::toBillDto)
                 .collect(Collectors.toList());
 
         model.addAttribute("bills", billDtos);

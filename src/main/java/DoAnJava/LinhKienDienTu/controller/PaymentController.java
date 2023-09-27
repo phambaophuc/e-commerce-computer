@@ -14,7 +14,7 @@ import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,20 +26,15 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class PaymentController {
-    @Autowired
+
     private PaypalService paypalService;
-    @Autowired
     private VNPayService vnPayService;
-    @Autowired
     private UserService userService;
-    @Autowired
     private BillService billService;
-    @Autowired
     private CartService cartService;
-    @Autowired
     private ProductService productService;
-    @Autowired
     private BillDetailService billDetailService;
 
     public static final String URL_PAYPAL_SUCCESS = "paypal/success";
@@ -105,22 +100,7 @@ public class PaymentController {
             Payment payment = paypalService.executePayment(paymentId, payerId);
             if(payment.getState().equals("approved")){
 
-                User user = userService.getUserByUsername(principal.getName());
-                Bill bill = new Bill();
-                billService.createBill(bill, user);
-
-                Cart cart = cartService.getCart(session);
-                List<Item> cartItems = cart.getCartItems();
-
-                for (Item cartItem : cartItems) {
-                    Product product = productService.getProductById(cartItem.getProductId());
-                    billDetailService.addProductToBill(product.getProductId(), bill.getBillId(), cartItem.getQuantity());
-                }
-
-                bill.setTotalPrice(BigDecimal.valueOf(cartService.getSumPrice(session)));
-                billService.updateBill(bill);
-
-                cartService.removeCart(session);
+                saveBillToDatabase(principal.getName(), session);
 
                 return "paypal/pay-success";
             }
@@ -156,22 +136,7 @@ public class PaymentController {
         model.addAttribute("transactionId", transactionId);
 
         if (paymentStatus == 1) {
-            User user = userService.getUserByUsername(principal.getName());
-            Bill bill = new Bill();
-            billService.createBill(bill, user);
-
-            Cart cart = cartService.getCart(session);
-            List<Item> cartItems = cart.getCartItems();
-
-            for (Item cartItem : cartItems) {
-                Product product = productService.getProductById(cartItem.getProductId());
-                billDetailService.addProductToBill(product.getProductId(), bill.getBillId(), cartItem.getQuantity());
-            }
-
-            bill.setTotalPrice(BigDecimal.valueOf(cartService.getSumPrice(session)));
-            billService.updateBill(bill);
-
-            cartService.removeCart(session);
+            saveBillToDatabase(principal.getName(), session);
 
             return "vnpay/ordersuccess";
         } else {
@@ -179,5 +144,24 @@ public class PaymentController {
         }
     }
     //endregion
+
+    private void saveBillToDatabase(String name, HttpSession httpSession) {
+        User user = userService.getUserByUsername(name);
+        Bill bill = new Bill();
+        billService.createBill(bill, user);
+
+        Cart cart = cartService.getCart(httpSession);
+        List<Item> cartItems = cart.getCartItems();
+
+        for (Item cartItem : cartItems) {
+            Product product = productService.getProductById(cartItem.getProductId());
+            billDetailService.addProductToBill(product.getProductId(), bill.getBillId(), cartItem.getQuantity());
+        }
+
+        bill.setTotalPrice(BigDecimal.valueOf(cartService.getSumPrice(httpSession)));
+        billService.updateBill(bill);
+
+        cartService.removeCart(httpSession);
+    }
 
 }

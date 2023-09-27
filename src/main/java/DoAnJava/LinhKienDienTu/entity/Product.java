@@ -3,14 +3,11 @@ package DoAnJava.LinhKienDienTu.entity;
 import DoAnJava.LinhKienDienTu.validator.annotation.ValidCategoryId;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "product")
 public class Product {

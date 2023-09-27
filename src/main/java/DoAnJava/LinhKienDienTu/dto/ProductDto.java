@@ -1,12 +1,11 @@
 package DoAnJava.LinhKienDienTu.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.math.BigDecimal;
-
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ProductDto {
     private Long productId;
     private Long categoryId;

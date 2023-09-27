@@ -1,19 +1,18 @@
 package DoAnJava.LinhKienDienTu.utils;
 
 import DoAnJava.LinhKienDienTu.entity.Role;
-import DoAnJava.LinhKienDienTu.repository.IRoleRepository;
+import DoAnJava.LinhKienDienTu.repository.RoleRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@AllArgsConstructor
 public class SampleDataInitializer {
-    private final IRoleRepository roleReponsitory;
 
-    public SampleDataInitializer(IRoleRepository roleReponsitory) {
-        this.roleReponsitory = roleReponsitory;
-    }
+    private final RoleRepository roleReponsitory;
 
     @EventListener(ApplicationReadyEvent.class)
     @Transactional

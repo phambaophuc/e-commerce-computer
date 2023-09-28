@@ -5,10 +5,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link th:fragment="link-css" rel="preconnect" href="https://fonts.googleapis.com">
-    <link th:fragment="link-css" rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link th:fragment="link-css" href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@600&display=swap" rel="stylesheet">
-
     <link th:fragment="link-css" rel="stylesheet" th:href="@{/vendor/font-awesome/css/all.min.css}">
     <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/mdb.min.css}">
     <link th:fragment="link-css" rel="stylesheet" th:href="@{/css/styles.css}">
@@ -22,7 +18,7 @@
                 <!-- Left elements -->
                 <div class="col-md-4 d-flex justify-content-center justify-content-md-start mb-3 mb-md-0">
                     <a href="/" class="ms-md-2">
-                        <img src="/img/logos/logo.png" height="40" />
+                        <img src="/img/logos/logo.png" height="40"/>
                     </a>
                 </div>
                 <!-- Left elements -->
@@ -30,7 +26,8 @@
                 <!-- Center elements -->
                 <div class="col-md-4">
                     <form class="d-flex input-group w-auto my-auto mb-3 mb-md-0" th:action="@{/product/search}">
-                        <input autocomplete="off" type="search" name="name" class="form-control rounded" placeholder="Search" />
+                        <input autocomplete="off" type="search" name="name" class="form-control rounded"
+                               placeholder="Search"/>
                         <span class="input-group-text border-0 d-none d-lg-flex"><i class="fas fa-search"></i></span>
                     </form>
                 </div>
@@ -52,9 +49,11 @@
                         </a>
                         <div class="dropdown" sec:authorize="isAuthenticated()">
                             <a class="text-reset dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
-                               id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="22"
-                                     alt="" loading="lazy" />
+                               id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown"
+                               aria-expanded="false">
+                                <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
+                                     class="rounded-circle" height="22"
+                                     alt="" loading="lazy"/>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" th:href="@{/profile}">My profile</a></li>
@@ -76,22 +75,28 @@
         <div class="container justify-content-center justify-content-md-between">
             <!-- Left links -->
             <ul class="navbar-nav flex-row">
-                <li class="nav-item me-2 me-lg-0">
-                    <a class="nav-link btn shadow-0" role="button">
-                        <i class="fas fa-bars me-1"></i>
-                        <span>Categories</span>
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link btn shadow-0" th:href="@{/product}">
+                        <span>Sản phẩm</span>
                     </a>
                 </li>
-                <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
-                    <a class="nav-link" href="/product">Sản phẩm</a>
+                <li class="nav-item me-3 me-lg-0 d-none d-md-inline-block dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                       data-mdb-toggle="dropdown" aria-expanded="false">
+                        Loại sản phẩm
+                    </a>
+
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" id="productDropdown">
+                        <!-- Các loại sản phẩm -->
+                    </ul>
                 </li>
-                <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+                <li class="nav-item me-3 me-lg-0 d-none d-md-inline-block">
                     <a class="nav-link" href="#">Siêu giảm giá</a>
                 </li>
-                <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+                <li class="nav-item me-3 me-lg-0 d-none d-md-inline-block">
                     <a class="nav-link" href="/about">Về chúng tôi</a>
                 </li>
-                <li class="nav-item me-2 me-lg-0 d-none d-md-inline-block">
+                <li class="nav-item me-3 me-lg-0 d-none d-md-inline-block">
                     <a class="nav-link" href="#">Liên hệ</a>
                 </li>
             </ul>
@@ -104,22 +109,26 @@
     <div class="modal fade" id="ModalForm" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="false">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 <div class="form-area bg-primary">
                     <h1 class="text-center">Login</h1>
                     <form th:action="@{/login}" method="POST">
                         <div class="form-floating mb-3 mt-4">
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                            <input type="text" class="form-control" id="username" name="username"
+                                   placeholder="Username">
                             <label for="username" class="text-dark">Username</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                            <input type="password" class="form-control" id="password" name="password"
+                                   placeholder="Password">
                             <label for="password" class="text-dark">Password</label>
                         </div>
                         <div class="d-flex justify-content-between align-items-center my-2">
                             <!-- Checkbox -->
                             <div class="form-check mb-0">
-                                <input class="form-check-input me-2" type="checkbox" name="remember-me" id="remember-me" />
+                                <input class="form-check-input me-2" type="checkbox" name="remember-me"
+                                       id="remember-me"/>
                                 <label class="form-check-label" for="remember-me">
                                     Remember me?
                                 </label>
@@ -144,10 +153,6 @@
         </div>
     </div>
 </header>
-
-<div th:insert="~{::${content}}">
-<!-- Nội dung chính -->
-</div>
 
 <footer class="bg-light text-center text-white" th:fragment="footer">
     <div class="container p-4 pb-0">
@@ -216,20 +221,8 @@
         <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const cartItemCountElement = document.getElementById("cartItemCount");
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", "/cartItemCount", true);
-            xhr.onload = function() {
-              if (xhr.status === 200) {
-                const cartItemCount = JSON.parse(xhr.responseText);
-                cartItemCountElement.textContent = cartItemCount;
-              }
-            };
-            xhr.send();
-        });
-    </script>
+    <script th:src="@{/js/ListCategory.js}"></script>
+    <script th:src="@{/js/CartItemCount.js}"></script>
     <script th:src="@{/js/mdb.min.js}"></script>
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
     <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>

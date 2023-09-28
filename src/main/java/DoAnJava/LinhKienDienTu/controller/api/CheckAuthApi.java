@@ -10,7 +10,8 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/user")
-public class UserApiController {
+public class CheckAuthApi {
+
     @GetMapping("/check-authentication")
     public Map<String, Boolean> checkAuthentication(Authentication authentication) {
         boolean isAuthenticated = authentication != null && authentication.isAuthenticated();

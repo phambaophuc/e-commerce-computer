@@ -4,8 +4,6 @@ import DoAnJava.LinhKienDienTu.entity.*;
 import DoAnJava.LinhKienDienTu.services.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
-import org.commonmark.parser.Parser;
-import org.commonmark.renderer.html.HtmlRenderer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,8 +25,7 @@ public class ProductController {
     private ProductService productService;
     private CommentService commentService;
     private UserService userService;
-    private Parser markdownParser;
-    private HtmlRenderer markdownHtmlRenderer;
+    private HtmlService htmlService;
 
     @GetMapping
     public String listProducts(Model model,
@@ -54,15 +51,13 @@ public class ProductController {
         String description = product.getDescription();
 
         // Sử dụng thư viện markdown để hiển thị mô tả sản phẩm.
-        String markdownDescription = markdownHtmlRenderer.render(markdownParser.parse(description));
-        product.setDescription(markdownDescription);
-        model.addAttribute("product", product);
-
         String htmlDescription = description
                 .replace("{{image1}}", "<img style=\"width:100%;\" src=\"https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/" + product.getExtraImage1() + "\"/>")
                 .replace("{{image2}}", "<img style=\"width:100%;\" src=\"https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/" + product.getExtraImage2() + "\"/>")
                 .replace("{{image3}}", "<img style=\"width:100%;\" src=\"https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/" + product.getExtraImage3() + "\"/>");
-        model.addAttribute("description", htmlDescription);
+        model.addAttribute("description", htmlService.markdownToHtml(htmlDescription));
+
+        model.addAttribute("product", product);
 
         List<Comment> comments = commentService.getCommentByProductId(productId);
         model.addAttribute("comments", comments);

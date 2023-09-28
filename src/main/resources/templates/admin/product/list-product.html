@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Quản lý sản phẩm</title>
-    <th:block th:replace="layout-admin :: link-css"></th:block>
+    <th:block th:replace="~{layout-admin :: link-css}"></th:block>
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
 <div id="wrapper">
-    <th:block th:replace="layout-admin :: header"></th:block>
+    <th:block th:replace="~{layout-admin :: header}"></th:block>
     <div id="content-wrapper">
         <div id="content">
             <th:block th:replace="layout-admin :: nav"></th:block>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <th:block th:replace="layout-admin :: footer"></th:block>
+            <th:block th:replace="~{layout-admin :: footer}"></th:block>
         </div>
     </div>
 </div>

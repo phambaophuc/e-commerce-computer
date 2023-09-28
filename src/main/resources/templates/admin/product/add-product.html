@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Tạo Sản Phẩm</title>
-    <th:block th:replace="layout-admin :: link-css"></th:block>
+    <th:block th:replace="~{layout-admin :: link-css}"></th:block>
 </head>
 <body id="page-top">
 <div id="wrapper">
-    <th:block th:replace="layout-admin :: header"></th:block>
+    <th:block th:replace="~{layout-admin :: header}"></th:block>
     <div id="content-wrapper">
         <div id="content">
-            <th:block th:replace="layout-admin :: nav"></th:block>
+            <th:block th:replace="~{layout-admin :: nav}"></th:block>
             <div class="container-fluid">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -78,7 +78,7 @@
                     </form>
                 </div>
             </div>
-            <th:block th:replace="layout-admin :: footer"></th:block>
+            <th:block th:replace="~{layout-admin :: footer}"></th:block>
         </div>
     </div>
 </div>

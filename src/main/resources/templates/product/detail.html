@@ -71,7 +71,7 @@
                                                 </p>
                                                 <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
                                                 <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
-                                                <a th:href="@{'/product/delete-comment/' + ${comment.getCommentId()}}"
+                                                <a th:href="@{'/product/delete-comment/' + ${comment.commentId}}"
                                                    class="link-muted link-danger" onclick="return confirm('Xoá comment?')">
                                                     <i class="fas fa-xmark ms-2"></i>
                                                 </a>

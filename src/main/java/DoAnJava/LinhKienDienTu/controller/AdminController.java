@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -59,7 +58,7 @@ public class AdminController {
     public String addProduct(@Valid @ModelAttribute("product") Product product,
                              BindingResult bindingResult, Model model,
                              @RequestParam(value = "mainImage")MultipartFile mainMultipartFile,
-                             @RequestParam(value = "extraImage", required = false)MultipartFile[] extraMultipartFile) throws IOException {
+                             @RequestParam(value = "extraImage", required = false)MultipartFile[] extraMultipartFile) {
 
         if (bindingResult.hasErrors())
         {
@@ -89,7 +88,7 @@ public class AdminController {
     public String editProduct(@ModelAttribute("product") Product product,
                               BindingResult bindingResult, Model model,
                               @RequestParam(value = "mainImage", required = false)MultipartFile mainMultipartFile,
-                              @RequestParam(value = "extraImage", required = false)MultipartFile[] extraMultipartFile) throws IOException {
+                              @RequestParam(value = "extraImage", required = false)MultipartFile[] extraMultipartFile) {
 
         if (bindingResult.hasErrors())
         {

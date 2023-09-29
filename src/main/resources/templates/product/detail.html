@@ -15,7 +15,8 @@
 <div class="container py-5">
     <div class="row d-flex align-items-center">
         <div class="col-md-4 item-photo">
-            <img style="max-width:100%;" th:src="@{'https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/' + ${product.mainImage}}"/>
+            <img style="max-width:100%;" th:alt="${product.productName}"
+                 th:src="@{'https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/' + ${product.mainImage}}"/>
         </div>
         <div class="col-md-6">
             <h3 th:text="${product.productName}"></h3>
@@ -69,8 +70,8 @@
                                                 <p class="mb-0" th:text="${comment.createdAt}">
                                                     <span class="badge bg-primary">Pending</span>
                                                 </p>
-                                                <a href="#!" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
-                                                <a href="#!" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
+                                                <a href="#" class="link-muted"><i class="fas fa-pencil-alt ms-2"></i></a>
+                                                <a href="#" class="link-muted"><i class="fas fa-heart ms-2"></i></a>
                                                 <a th:href="@{'/product/delete-comment/' + ${comment.commentId}}"
                                                    class="link-muted link-danger" onclick="return confirm('Xoá comment?')">
                                                     <i class="fas fa-xmark ms-2"></i>

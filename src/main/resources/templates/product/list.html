@@ -16,7 +16,7 @@
                     <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                          data-mdb-ripple-color="light">
                         <img th:src="@{'https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/' + ${product.mainImage}}"
-                             class="w-75 pt-4"/>
+                             class="w-75 pt-4" th:alt="${product.productName}"/>
                         <a th:href="@{'/product/' + ${product.productId}}">
                             <div class="mask">
                                 <div class="d-flex justify-content-end align-items-end h-100">

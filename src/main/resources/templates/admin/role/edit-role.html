@@ -19,7 +19,7 @@
                     <form class="p-4" th:action="@{/admin/edit-role/{roleId}(roleId=${role.roleId})}" method="POST" th:object="${role}">
                         <div>
                             <label class="form-label" for="roleName" style="width:90px">Tên Quyền:</label>
-                            <input class="form-control-sm" type="roleName" id="roleName" name="roleName" th:field="*{roleName}" th:value="*{roleName}"/>
+                            <input class="form-control-sm" id="roleName" name="roleName" th:field="*{roleName}" th:value="*{roleName}"/>
                             <span th:if="${#fields.hasErrors('roleName')}" th:errors="*{roleName}" class="error"></span>
                         </div>
                         <div class="mt-2">

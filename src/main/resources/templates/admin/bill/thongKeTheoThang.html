@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Thống kê</title>
-    <th:block th:replace="layout-admin :: link-css"></th:block>
+    <th:block th:replace="~{layout-admin :: link-css}"></th:block>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body id="page-top">
 <div id="wrapper">
-    <th:block th:replace="layout-admin :: header"></th:block>
+    <th:block th:replace="~{layout-admin :: header}"></th:block>
     <div id="content-wrapper">
         <div id="content">
-            <th:block th:replace="layout-admin :: nav"></th:block>
+            <th:block th:replace="~{layout-admin :: nav}"></th:block>
             <div class="container-fluid">
                 <div>
                     <label for="yearSelect">Chọn năm:</label>
@@ -70,7 +70,7 @@
                     loadRevenueData(currentYear);
                 </script>
             </div>
-            <th:block th:replace="layout-admin :: footer"></th:block>
+            <th:block th:replace="~{layout-admin :: footer}"></th:block>
         </div>
     </div>
 </div>

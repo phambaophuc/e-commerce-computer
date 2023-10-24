@@ -18,7 +18,8 @@
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Sửa sản phẩm</h6>
                     </div>
-                    <form class="p-4" th:action="@{/admin/edit-product}" th:object="${product}" method="POST" enctype="multipart/form-data">
+                    <form class="p-4" th:action="@{/admin/products/edit-product}" th:object="${product}" method="POST"
+                          enctype="multipart/form-data">
                         <input type="hidden" th:field="*{productId}">
                         <div class="row mt-2">
                             <div class="col">
@@ -28,15 +29,19 @@
                             <div class="col">
                                 <label class="form-label" for="category">Loại sản phẩm:</label>
                                 <select class="form-control" id="category" name="category.categoryId">
-                                    <option th:each="category: ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}"
-                                            th:selected="${product.category.categoryId == category.categoryId}"></option>
+                                    <option th:each="category: ${categories}" th:value="${category.categoryId}"
+                                            th:text="${category.categoryName}"
+                                            th:selected="${product.category.categoryId == category.categoryId}">
+                                    </option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="mt-2">
                             <label class="form-label" for="description">Mô Tả: </label>
-                            <textarea class="form-control" id="description" th:field="*{description}" style="height:300px"></textarea>
+                            <textarea class="form-control" id="description" th:field="*{description}"
+                                      style="height:300px">
+                            </textarea>
                         </div>
 
                         <div class="row mt-2">
@@ -55,15 +60,17 @@
                         </div>
 
                         <div class="mt-2">
-                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-                                    aria-expanded="false" aria-controls="collapseExample">
+                            <button class="btn btn-primary" type="button" data-toggle="collapse"
+                                    data-target="#collapseExample" aria-expanded="false"
+                                    aria-controls="collapseExample">
                                 Thêm hình ảnh
                             </button>
                         </div>
                         <div class="collapse" id="collapseExample">
                             <div class="card card-body">
                                 <div class="com-sm-4">
-                                    <input type="file" name="mainImage" title="Chọn hình ảnh chính cho sản phẩm" accept="image/*">
+                                    <input type="file" name="mainImage" title="Chọn hình ảnh chính cho sản phẩm"
+                                           accept="image/*">
                                     <input type="file" name="extraImage" accept="image/*">
                                     <input type="file" name="extraImage" accept="image/*">
                                     <input type="file" name="extraImage" accept="image/*">

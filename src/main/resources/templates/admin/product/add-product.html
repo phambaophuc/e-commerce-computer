@@ -16,7 +16,7 @@
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Thêm sản phẩm</h6>
                     </div>
-                    <form class="p-4" th:action="@{/admin/add-product}" th:object="${product}" method="POST" enctype="multipart/form-data">
+                    <form class="p-4" th:action="@{/admin/products/add-product}" th:object="${product}" method="POST" enctype="multipart/form-data">
                         <div class="row mt-2">
                             <div class="col">
                                 <label class="form-label" for="productName">Tên Sản Phẩm: </label>

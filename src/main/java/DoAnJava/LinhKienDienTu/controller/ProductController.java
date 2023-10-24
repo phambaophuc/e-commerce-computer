@@ -48,13 +48,7 @@ public class ProductController {
         model.addAttribute("currentUsername", currentUsername);
 
         Product product = productService.getProductById(productId);
-        String description = product.getDescription();
-
-        // Sử dụng thư viện markdown để hiển thị mô tả sản phẩm.
-        String htmlDescription = description
-                .replace("{{image1}}", "<img style=\"width:100%;\" src=\"https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/" + product.getExtraImage1() + "\"/>")
-                .replace("{{image2}}", "<img style=\"width:100%;\" src=\"https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/" + product.getExtraImage2() + "\"/>")
-                .replace("{{image3}}", "<img style=\"width:100%;\" src=\"https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/" + product.getExtraImage3() + "\"/>");
+        String htmlDescription = getDescription(product);
         model.addAttribute("description", htmlService.markdownToHtml(htmlDescription));
 
         model.addAttribute("product", product);
@@ -66,6 +60,17 @@ public class ProductController {
         model.addAttribute("newComment", newComment);
 
         return "product/detail";
+    }
+
+    private static String getDescription(Product product) {
+        String description = product.getDescription();
+
+        // Sử dụng thư viện markdown để hiển thị mô tả sản phẩm.
+        String htmlDescription = description
+                .replace("{{image1}}", "<img style=\"width:100%;\" src=\"https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/" + product.getExtraImage1() + "\"/>")
+                .replace("{{image2}}", "<img style=\"width:100%;\" src=\"https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/" + product.getExtraImage2() + "\"/>")
+                .replace("{{image3}}", "<img style=\"width:100%;\" src=\"https://phuc-public-image.s3.ap-southeast-2.amazonaws.com/" + product.getExtraImage3() + "\"/>");
+        return htmlDescription;
     }
 
     @PostMapping("/{productId}")

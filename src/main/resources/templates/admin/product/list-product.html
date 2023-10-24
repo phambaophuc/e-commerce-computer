@@ -16,7 +16,7 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="font-weight-bold text-primary">DataTables Product</h6>
-                        <a class="mt-3" th:href="@{/admin/add-product}">Thêm sản phẩm</a>
+                        <a class="mt-3" th:href="@{/admin/products/add-product}">Thêm sản phẩm</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -49,10 +49,13 @@
                                     <td th:text="${product.note}"></td>
                                     <td th:text="${product.category.categoryName}"></td>
                                     <td>
-                                        <a th:href="@{/admin/edit-product/{id}(id=${product.productId})}" class="mr-2">
+                                        <a th:href="@{/admin/products/edit-product/{id}(id=${product.productId})}"
+                                           class="mr-2">
                                             <i class="fa-regular fa-pen-to-square"></i></a>
-                                        <a th:href="@{/admin/delete-product/{id}(id=${product.productId})}"
-                                           onclick="return confirm('Xóa sản phẩm này?')"><i class="fas fa-times" style="color:red"></i></a>
+                                        <a th:href="@{/admin/products/delete-product/{id}(id=${product.productId})}"
+                                           onclick="return confirm('Xóa sản phẩm này?')">
+                                            <i class="fas fa-times" style="color:red"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 </tbody>

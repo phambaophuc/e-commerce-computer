@@ -27,7 +27,7 @@
                         <div class="card-body">
                             <div class="alert alert-danger d-inline-block" th:if="${exists}" th:text="${exists}"></div>
                             <div class="alert alert-success d-inline-block" th:if="${success}" th:text="${success}"></div>
-                            <form th:action="@{/admin/assign-role}" method="POST">
+                            <form th:action="@{/admin/roles/assign-role}" method="POST">
                                 <input type="hidden" name="userId" th:value="${user.userId}">
                                 <div>
                                     <label class="form-label">Username:
@@ -67,7 +67,7 @@
                         <div class="card-body">
                             <div th:if="${notExist}" class="alert alert-warning d-inline-block" th:text="${notExist}"></div>
                             <div th:if="${success}" class="alert alert-success d-inline-block" th:text="${success}"></div>
-                            <form th:action="@{/admin/remove-role-from-user}" method="POST">
+                            <form th:action="@{/admin/roles/remove-role-from-user}" method="POST">
                                 <input type="hidden" name="userId" th:value="${user.userId}">
                                 <div>
                                     <label class="form-label">Username:

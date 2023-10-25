@@ -2,6 +2,7 @@ package DoAnJava.LinhKienDienTu.services.impl;
 
 import DoAnJava.LinhKienDienTu.entity.Role;
 import DoAnJava.LinhKienDienTu.repository.RoleRepository;
+import DoAnJava.LinhKienDienTu.repository.UserRepository;
 import DoAnJava.LinhKienDienTu.services.RoleService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.UUID;
 public class RoleServiceImpl implements RoleService {
 
     private RoleRepository roleRepository;
+    private UserRepository userRepository;
 
     @Override
     public List<Role> getAllRoles() {
@@ -35,5 +37,20 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void removeRole(UUID roleId) {
         roleRepository.deleteById(roleId);
+    }
+
+    @Override
+    public void addRoleToUser(UUID userId, UUID roleId) {
+        userRepository.addRoleToUser(userId, roleId);
+    }
+
+    @Override
+    public void removeRoleFromUser(UUID userId, UUID roleId) {
+        userRepository.removeRoleFromUser(userId, roleId);
+    }
+
+    @Override
+    public String[] getRolesOfUser(UUID id) {
+        return userRepository.getRolesOfUser(id);
     }
 }

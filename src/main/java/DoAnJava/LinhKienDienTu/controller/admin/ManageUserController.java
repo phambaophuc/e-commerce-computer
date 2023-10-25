@@ -36,7 +36,7 @@ public class ManageUserController {
     public String addRoleToUserForm(@PathVariable("id") UUID id, Model model) {
         User user = userService.getUserById(id);
         List<Role> roles = roleService.getAllRoles();
-        String[] rolesOfUser = userService.getRolesOfUser(id);
+        String[] rolesOfUser = roleService.getRolesOfUser(id);
 
         model.addAttribute("user", user);
         model.addAttribute("roles", roles);
@@ -47,14 +47,14 @@ public class ManageUserController {
     @PostMapping("/assign-role")
     public String addRoleToUser(@RequestParam UUID userId,
                                 @RequestParam UUID roleId, RedirectAttributes redirectAttributes) {
-        String[] roles = userService.getRolesOfUser(userId);
+        String[] roles = roleService.getRolesOfUser(userId);
         String roleName = roleService.getRoleById(roleId).getRoleName();
 
         if (Arrays.asList(roles).contains(roleName)) {
             redirectAttributes.addFlashAttribute("exists", "Quyền đã tồn tại cho người dùng này");
             return "redirect:/admin/assign-role/" + userId;
         } else {
-            userService.addRoleToUser(userId, roleId);
+            roleService.addRoleToUser(userId, roleId);
             redirectAttributes.addFlashAttribute("success", "Đã thêm quyền cho người dùng này");
         }
         return "redirect:/admin/assign-role/" + userId;
@@ -63,11 +63,11 @@ public class ManageUserController {
     @PostMapping("/remove-role-from-user")
     public String removeRoleFromUser(@RequestParam("userId") UUID userId,
                                      @RequestParam("roleId") UUID roleId, RedirectAttributes redirectAttributes) {
-        String[] roles = userService.getRolesOfUser(userId);
+        String[] roles = roleService.getRolesOfUser(userId);
         String roleName = roleService.getRoleById(roleId).getRoleName();
 
         if (Arrays.asList(roles).contains(roleName)) {
-            userService.removeRoleFromUser(userId, roleId);
+            roleService.removeRoleFromUser(userId, roleId);
             redirectAttributes.addFlashAttribute("success", "Đã xóa quyền cho người dùng này");
         } else {
             redirectAttributes.addFlashAttribute("notExist", "Người dùng không có quyền này");

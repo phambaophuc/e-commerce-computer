@@ -15,12 +15,6 @@ public interface UserService {
 
     User getUserById(UUID id);
 
-    void addRoleToUser(UUID userId, UUID roleId);
-
-    void removeRoleFromUser(UUID userId, UUID roleId);
-
-    String[] getRolesOfUser(UUID id);
-
     void saveUser(User user);
 
     void updateResetPasswordToken(String token, String email);

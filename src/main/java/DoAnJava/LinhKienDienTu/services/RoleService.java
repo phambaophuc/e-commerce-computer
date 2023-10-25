@@ -15,4 +15,9 @@ public interface RoleService {
 
     void removeRole(UUID roleId);
 
+    void addRoleToUser(UUID userId, UUID roleId);
+
+    void removeRoleFromUser(UUID userId, UUID roleId);
+
+    String[] getRolesOfUser(UUID id);
 }

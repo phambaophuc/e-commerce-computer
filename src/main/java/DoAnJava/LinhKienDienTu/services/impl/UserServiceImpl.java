@@ -56,21 +56,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addRoleToUser(UUID userId, UUID roleId) {
-        userRepository.addRoleToUser(userId, roleId);
-    }
-
-    @Override
-    public void removeRoleFromUser(UUID userId, UUID roleId) {
-        userRepository.removeRoleFromUser(userId, roleId);
-    }
-
-    @Override
-    public String[] getRolesOfUser(UUID id) {
-        return userRepository.getRolesOfUser(id);
-    }
-
-    @Override
     public void saveUser(User user) {
         userRepository.save(user);
     }

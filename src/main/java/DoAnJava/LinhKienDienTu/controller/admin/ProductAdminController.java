@@ -2,6 +2,7 @@ package DoAnJava.LinhKienDienTu.controller.admin;
 
 import DoAnJava.LinhKienDienTu.entity.Product;
 import DoAnJava.LinhKienDienTu.services.*;
+import DoAnJava.LinhKienDienTu.utils.S3Util;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ public class ProductAdminController {
 
     private ProductService productService;
     private CategoryService categoryService;
+    private S3Service s3Service;
 
     @GetMapping()
     public String getAllProduct(Model model) {
@@ -52,7 +54,7 @@ public class ProductAdminController {
             return "admin/product/add-product";
         }
 
-        productService.uploadFileAWS(product, mainMultipartFile, extraMultipartFile, false);
+        s3Service.uploadFileAWS(product, mainMultipartFile, extraMultipartFile, false);
 
         productService.saveProduct(product);
         return "redirect:/admin/products";
@@ -83,7 +85,7 @@ public class ProductAdminController {
             return "admin/product/edit-product" + product.getProductId();
         }
 
-        productService.uploadFileAWS(product, mainMultipartFile, extraMultipartFile, true);
+        s3Service.uploadFileAWS(product, mainMultipartFile, extraMultipartFile, true);
 
         productService.saveProduct(product);
 
@@ -92,7 +94,11 @@ public class ProductAdminController {
 
     @GetMapping("/delete-product/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
+        Product product = productService.getProductById(id);
+
+        //S3Util.deleteFile(product.getMainImage());
         productService.deleteProduct(id);
+
         return "redirect:/admin/products";
     }
 }

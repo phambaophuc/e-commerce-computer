@@ -56,9 +56,17 @@
                                      alt="" loading="lazy"/>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" th:href="@{/profile}">My profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item link-danger" th:href="@{/logout}">Logout</a></li>
+                                <li>
+                                    <a class="dropdown-item" th:href="@{/profile}">My profile</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-primary" th:href="@{/admin}" sec:authorize="hasAuthority('ADMIN')">
+                                        Quản lý
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item link-danger" th:href="@{/logout}">Logout</a>
+                                </li>
                             </ul>
                         </div>
                     </div>

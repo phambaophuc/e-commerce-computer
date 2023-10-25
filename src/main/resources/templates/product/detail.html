@@ -8,6 +8,13 @@
         textarea {
             resize: none;
         }
+
+        .description {
+            text-align: justify;
+        }
+            .description img {
+                width: 100%;
+            }
     </style>
 </head>
 <body>
@@ -43,7 +50,7 @@
         <div class="row col-xs-9 mt-3">
             <div class="col-md-8">
                 <div class="my-3 fw-bold" style="font-size:22px">Mô tả sản phẩm</div>
-                <div style="text-align: justify;" th:utext="${description}"></div>
+                <div class="description" th:utext="${description}"></div>
             </div>
             <div class="col-md-4">
                 <div class="ms-4 fw-bold text-center">Thông tin chi tiết</div>

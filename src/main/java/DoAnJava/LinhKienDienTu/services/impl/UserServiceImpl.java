@@ -111,7 +111,6 @@ public class UserServiceImpl implements UserService {
         user.setEnabled(false);
         user.setAuthType(AuthenticationType.LOCAL);
 
-        userRepository.save(user);
         UUID userId = userRepository.getUserIdByUsername(user.getUsername());
         UUID roleId = roleRepository.getRoleIdByRoleName("USER");
         if (roleId != null && userId != null) {
@@ -119,6 +118,7 @@ public class UserServiceImpl implements UserService {
         }
 
         sendVerificationEmail(user, siteURL);
+        userRepository.save(user);
     }
 
     @Override

@@ -23,6 +23,7 @@ import java.util.UUID;
 public class ProductController {
 
     private ProductService productService;
+    private CategoryService categoryService;
     private CommentService commentService;
     private UserService userService;
     private HtmlService htmlService;
@@ -38,6 +39,8 @@ public class ProductController {
         model.addAttribute("products", productPage.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", productPage.getTotalPages());
+
+        model.addAttribute("categories", categoryService.getAllCategory());
         return "product/list";
     }
 

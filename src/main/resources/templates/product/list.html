@@ -8,7 +8,48 @@
 <body>
 <th:block th:replace="~{layout :: header}"></th:block>
 <section style="background-color: #eee;">
-    <div class="text-center container py-5">
+    <div class="container mt-5">
+        <div class="row gx-3">
+            <main class="col-lg-9">
+                <div class="card-banner p-5 bg-primary rounded-5" style="height: 350px;">
+                    <div style="max-width: 500px;">
+                        <h2 class="text-white">
+                            Great products with <br />
+                            best deals
+                        </h2>
+                        <p class="text-white">No matter how far along you are in your sophistication as an amateur astronomer, there is always one.</p>
+                        <a href="#" class="btn btn-light shadow-0 text-primary"> View more </a>
+                    </div>
+                </div>
+            </main>
+            <aside class="col-lg-3">
+                <div class="card-banner h-100 rounded-5" style="background-color: #f87217;">
+                    <div class="card-body text-center pb-5">
+                        <h5 class="pt-5 text-white">Amazing Gifts</h5>
+                        <p class="text-white">No matter how far along you are in your sophistication</p>
+                        <a href="#" class="btn btn-outline-light"> View more </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <nav class="row gy-4">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col" th:each="category: ${categories}">
+                        <a th:href="${'/product/search?category=' + category.categoryName}" class="text-center d-flex flex-column justify-content-center">
+                            <button type="button" class="btn btn-outline-secondary mx-auto p-3 mb-2" data-mdb-ripple-color="dark">
+                                <img th:src="${category.categoryImage}" width="40px" alt="">
+                            </button>
+                            <div class="text-dark" th:text="${category.categoryName}"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="text-center container mt-5">
         <h4 class="mt-4 mb-5"><strong>Sản phẩm mới</strong></h4>
         <div class="row">
             <div class="col-lg-3 col-md-12 mb-4" th:each="product : ${products}">
@@ -63,6 +104,17 @@
                         </li>
                     </ul>
                 </nav>
+            </div>
+        </div>
+    </div>
+    <div class="container my-4">
+        <div class="card p-4 bg-primary">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h4 class="mb-0 text-white">Best products and brands in store</h4>
+                    <p class="mb-0 text-white-50">Trendy products and text to build on the card title</p>
+                </div>
+                <div class="col-auto"><a class="btn btn-white text-primary shadow-0" href="#">Discover</a></div>
             </div>
         </div>
     </div>

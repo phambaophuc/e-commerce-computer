@@ -9,12 +9,12 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/linhkiendientu
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: phuc27602
+      SPRING_DATASOURCE_PASSWORD: 
 
   db:
     image: mysql:latest
     ports:
       - "3307:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: phuc27602
+      MYSQL_ROOT_PASSWORD: 
       MYSQL_DATABASE: linhkiendientu
